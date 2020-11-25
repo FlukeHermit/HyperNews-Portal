@@ -1,0 +1,4 @@
+/.vscode
+db.sqlite3
+hypernews/__pycache__/
+hypernews/__init__.py
