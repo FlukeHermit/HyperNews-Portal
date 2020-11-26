@@ -1,4 +1,4 @@
-"""HyperNews URL Configuration
+"""hypernews URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/2.2/topics/http/urls/
@@ -15,9 +15,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from news.views import NewsView
+from news.views import HomeView, NewsView
 
 urlpatterns = [
-    path('', NewsView.as_view()),
-    path('admin/', admin.site.urls),
+    path('', HomeView.as_view()),
+    path('news/<int:link>/', NewsView.as_view()),
+    # How to get parameter from url? adding '<int:post_id>/' at the end of the path calls your 
+    # function with new parameter "post_id" which must be an integer.
+    path('admin/', admin.site.urls)
+
 ]
