@@ -38,3 +38,8 @@ class NewsView(View):
             news_feed = test_json
 
         return render(request, 'news/index.html', context=news_feed)
+
+class HypernewsView(View):
+    def get(self, request, *args, **kwargs):
+        with open(settings.NEWS_JSON_PATH) as json_file:
+            return render(request, "news/hypernews.html", context={"news_list": json.load(json_file)})

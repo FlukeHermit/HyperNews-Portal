@@ -1,0 +1,22 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Hyper news</title>
+</head>
+<body>
+    <h2>Hyper news</h2>
+    {%  regroup news_list|dictsortreversed:'created' by created.split|slice:':1'|join:"" as archive  %}
+    <!--https://www.djangotemplatetagsandfilters.com/filters/dictsortreversed/-->
+    <!--https://www.kite.com/python/docs/django.template.defaulttags.regroup-->
+    {% for date, archived_news in archive %}
+    <h4>{{ date }}</h4>
+    <ul>
+    {% for news in archived_news %}
+        <li><a href="/news/{{ news.link }}/">{{ news.title }}</a></li>
+    {% endfor %}
+    </ul>
+    {% endfor %}
+    <a href="/news/create/">Create news</a>
+</body>
+</html>

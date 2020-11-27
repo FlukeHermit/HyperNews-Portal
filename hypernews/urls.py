@@ -15,13 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from news.views import HomeView, NewsView
+from news.views import HomeView, NewsView, HypernewsView
 
 urlpatterns = [
     path('', HomeView.as_view()),
+    path('news/', HypernewsView.as_view()),
     path('news/<int:link>/', NewsView.as_view()),
-    # How to get parameter from url? adding '<int:post_id>/' at the end of the path calls your 
-    # function with new parameter "post_id" which must be an integer.
     path('admin/', admin.site.urls)
 
 ]
