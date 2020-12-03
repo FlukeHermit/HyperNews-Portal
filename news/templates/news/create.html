@@ -1,0 +1,22 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Create news</title>
+</head>
+<body>
+    <form action="/news/create/" method="post">
+        {% csrf_token %}
+        <label>News title:
+            <input type="text" name="title">
+        </label>
+        <br>
+        <label for="news-text">News text:</label>
+        <br>
+        <textarea id="news-text" name="text"></textarea>
+        <br>
+        <input type="submit" value="Create">
+    </form>
+    <a href="/news/">News Home</a>
+</body>
+</html>

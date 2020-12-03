@@ -15,12 +15,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from news.views import HomeView, NewsView, HypernewsView
+from news.views import HomeView, NewsView, HypernewsView, CreateView
 
 urlpatterns = [
     path('', HomeView.as_view()),
     path('news/', HypernewsView.as_view()),
     path('news/<int:link>/', NewsView.as_view()),
+    path('news/create/', CreateView.as_view()),
     path('admin/', admin.site.urls)
 
 ]
