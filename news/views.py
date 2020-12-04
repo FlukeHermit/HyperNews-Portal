@@ -19,11 +19,12 @@ test_json = {
 
 class HomeView(View):
     def get(self, response, *args, **kwargs):
-        html = '''
-<title>HyperNews Page</title>
-<h1>Coming soon</h1>
-'''
-        return HttpResponse(html)
+        #         html = '''
+        # <title>HyperNews Page</title>
+        # <h1>Coming soon</h1>
+        # '''
+        #         return HttpResponse(html)
+        return redirect("/news/")
 
 
 class NewsView(View):
@@ -46,7 +47,12 @@ class NewsView(View):
 class HypernewsView(View):
     def get(self, request, *args, **kwargs):
         with open(settings.NEWS_JSON_PATH) as json_file:
-            return render(request, "news/hypernews.html", context={"news_list": json.load(json_file)})
+            news_list = json.load(json_file)
+            query = request.GET.get('q')
+            if query:
+                news_list = [
+                    news for news in news_list if query in news['title']]
+            return render(request, "news/hypernews.html", context={"news_list": news_list})
 
 
 class CreateView(View):
@@ -74,10 +80,4 @@ class CreateView(View):
             news_list.append(news)
             news_file.seek(0)
             json.dump(news_list, news_file)
-
-# The render function Combines a given template with a given context dictionary and returns an HttpResponse
-# object with that rendered text.
-
-# You request a page and the render function returns it.
-
-# The redirect function sends another request to the given url.
+        return redirect('/news/')

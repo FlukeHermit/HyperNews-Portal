@@ -1,11 +1,20 @@
+
 <!doctype html>
 <html>
 <head>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">    
     <meta charset="UTF-8">
     <title>Hyper news</title>
 </head>
 <body>
     <h2>Hyper news</h2>
+    
+    <form action="/news/" method="get">
+        {% csrf_token %}
+        <input name="q" placeholder="type a news title">
+        <input type="submit" value="Search">
+      </form>
     {%  regroup news_list|dictsortreversed:'created' by created.split|slice:':1'|join:"" as archive  %}
     <!--https://www.djangotemplatetagsandfilters.com/filters/dictsortreversed/-->
     <!--https://www.kite.com/python/docs/django.template.defaulttags.regroup-->
